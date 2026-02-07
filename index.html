@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simplereally — Tools that do one thing well</title>
     <meta name="description" content="Free developer tools, digital products, and APIs. Built by one developer with AI-powered tools.">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#0a0a0b">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Simplereally — Tools that do one thing well">
@@ -13,34 +13,56 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://simplereally.github.io/">
     
-    <!-- Fonts -->
+    <!-- Fonts - Forge Design System -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
+        /* ═══════════════════════════════════════════════════════════════
+           FORGE DESIGN SYSTEM — Industrial Dark with Molten Accents
+           ═══════════════════════════════════════════════════════════════ */
+        
+        :root {
+            --forge-void: #0a0a0b;
+            --forge-charcoal: #141417;
+            --forge-gunmetal: #1c1c21;
+            --forge-steel: #2a2a32;
+            --forge-iron: #4a4a55;
+            --forge-silver: #8b8b99;
+            --forge-chrome: #c4c4d4;
+            --forge-white: #f0f0f5;
+            
+            --forge-ember: #ff6b35;
+            --forge-flame: #ff8c42;
+            --forge-spark: #ffb366;
+            --forge-heat: #ef4444;
+            --forge-glow: rgba(255, 107, 53, 0.12);
+            --forge-success: #22c55e;
+            
+            --font-display: 'Chakra Petch', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+        }
+        
         *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        :root {
-            --bg-base: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.5);
-            --bg-card-hover: rgba(51, 65, 85, 0.6);
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --accent-cyan: #06b6d4;
-            --accent-violet: #8b5cf6;
-            --accent-ember: #f97316;
-            --accent-green: #22c55e;
-            --border-color: rgba(148, 163, 184, 0.1);
-            --gradient-1: linear-gradient(135deg, #06b6d4, #8b5cf6);
-            --gradient-2: linear-gradient(135deg, #8b5cf6, #ec4899);
-            --font-heading: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
         }
         
         html {
@@ -49,10 +71,24 @@
         
         body {
             font-family: var(--font-body);
-            background: var(--bg-base);
-            color: var(--text-primary);
+            background: var(--forge-void);
+            color: var(--forge-chrome);
             line-height: 1.6;
             overflow-x: hidden;
+        }
+        
+        /* Grain Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
         }
         
         /* Gradient mesh background */
@@ -61,9 +97,9 @@
             inset: 0;
             z-index: -1;
             background: 
-                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(6, 182, 212, 0.15), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(139, 92, 246, 0.12), transparent),
-                radial-gradient(ellipse 50% 30% at 50% 80%, rgba(249, 115, 22, 0.08), transparent);
+                radial-gradient(ellipse 80% 50% at 20% 40%, var(--forge-glow), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(255, 140, 66, 0.08), transparent),
+                radial-gradient(ellipse 50% 30% at 50% 80%, rgba(255, 179, 102, 0.05), transparent);
         }
         
         /* Container */
@@ -73,60 +109,88 @@
             padding: 0 24px;
         }
         
-        /* Navigation */
-        nav {
+        /* ═══════════════ NAVIGATION ═══════════════ */
+        
+        .forge-nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 16px 0;
-            background: rgba(15, 23, 42, 0.8);
+            background: linear-gradient(180deg, var(--forge-charcoal) 0%, transparent 100%);
+            padding: var(--space-md) var(--space-lg);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
         }
         
-        nav .container {
+        .forge-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .nav-logo {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
+        .forge-logo {
+            font-family: var(--font-display);
             font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--text-secondary);
+            font-size: 1.4rem;
+            color: var(--forge-white);
             text-decoration: none;
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            letter-spacing: 0.5px;
+        }
+        
+        .forge-logo .icon {
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 8px var(--forge-ember));
+        }
+        
+        .forge-nav-links {
+            display: flex;
+            gap: var(--space-xs);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .forge-nav-links a {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
             font-weight: 500;
-            transition: color 0.2s;
+            color: var(--forge-silver);
+            text-decoration: none;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            transition: var(--transition-fast);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
         
-        .nav-links a:hover {
-            color: var(--text-primary);
+        .forge-nav-links a:hover {
+            color: var(--forge-ember);
+            background: var(--forge-glow);
         }
         
-        @media (max-width: 768px) {
-            .nav-links {
+        .forge-nav-links a.active {
+            color: var(--forge-ember);
+        }
+        
+        @media (max-width: 900px) {
+            .forge-nav-links a {
+                font-size: 0.7rem;
+                padding: var(--space-xs);
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .forge-nav-links {
                 display: none;
             }
         }
         
-        /* Hero Section */
+        /* ═══════════════ HERO ═══════════════ */
+        
         .hero {
             min-height: 100vh;
             display: flex;
@@ -134,34 +198,43 @@
             justify-content: center;
             text-align: center;
             padding: 120px 24px 80px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: radial-gradient(ellipse at center, var(--forge-glow) 0%, transparent 70%);
+            pointer-events: none;
         }
         
         .hero-content {
             max-width: 800px;
+            position: relative;
         }
         
         .hero h1 {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-cyan) 50%, var(--accent-violet) 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 8s ease infinite;
+            color: var(--forge-white);
+            letter-spacing: 2px;
         }
         
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        .hero h1 .accent {
+            color: var(--forge-ember);
         }
         
         .hero .tagline {
             font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-            color: var(--text-secondary);
+            color: var(--forge-silver);
             margin-bottom: 48px;
         }
         
@@ -172,43 +245,49 @@
             flex-wrap: wrap;
         }
         
+        /* ═══════════════ BUTTONS ═══════════════ */
+        
         .btn {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            border: none;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
+            gap: var(--space-sm);
         }
         
         .btn-primary {
-            background: var(--gradient-1);
-            color: white;
+            background: linear-gradient(135deg, var(--forge-ember) 0%, var(--forge-flame) 100%);
+            color: var(--forge-void);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(6, 182, 212, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
         }
         
         .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(8px);
+            background: var(--forge-gunmetal);
+            color: var(--forge-chrome);
+            border: 1px solid var(--forge-steel);
         }
         
         .btn-secondary:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--accent-cyan);
+            background: var(--forge-steel);
+            border-color: var(--forge-iron);
         }
         
-        /* Section styling */
+        /* ═══════════════ SECTIONS ═══════════════ */
+        
         section {
             padding: 100px 0;
         }
@@ -219,20 +298,26 @@
         }
         
         .section-header h2 {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
             margin-bottom: 16px;
+            color: var(--forge-white);
+        }
+        
+        .section-header h2 .accent {
+            color: var(--forge-ember);
         }
         
         .section-header p {
-            color: var(--text-secondary);
+            color: var(--forge-silver);
             font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
         }
         
-        /* Card Grid */
+        /* ═══════════════ CARD GRID ═══════════════ */
+        
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -240,14 +325,27 @@
         }
         
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
+            background: var(--forge-charcoal);
+            border: 1px solid var(--forge-steel);
+            border-radius: var(--radius-lg);
             padding: 28px;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
+            transition: var(--transition-fast);
             opacity: 0;
             transform: translateY(30px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--forge-ember), transparent);
+            opacity: 0;
+            transition: var(--transition-fast);
         }
         
         .card.visible {
@@ -257,31 +355,36 @@
         
         .card:hover {
             transform: translateY(-4px);
-            background: var(--bg-card-hover);
-            border-color: rgba(148, 163, 184, 0.2);
+            border-color: var(--forge-ember);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card:hover::before {
+            opacity: 0.5;
         }
         
         .card-icon {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             margin-bottom: 20px;
+            background: var(--forge-glow);
         }
         
         .card h3 {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 8px;
+            color: var(--forge-white);
         }
         
         .card p {
-            color: var(--text-secondary);
+            color: var(--forge-silver);
             font-size: 0.95rem;
             margin-bottom: 20px;
         }
@@ -290,29 +393,18 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            color: var(--accent-cyan);
+            color: var(--forge-ember);
             text-decoration: none;
+            font-family: var(--font-display);
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             transition: gap 0.2s;
         }
         
         .card-link:hover {
             gap: 10px;
-        }
-        
-        /* Forge Cards - Ember accent */
-        .forge-card .card-icon {
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(234, 88, 12, 0.1));
-            color: var(--accent-ember);
-        }
-        
-        .forge-card:hover {
-            border-color: rgba(249, 115, 22, 0.3);
-        }
-        
-        .forge-card .card-link {
-            color: var(--accent-ember);
         }
         
         /* Product Cards */
@@ -321,50 +413,38 @@
             flex-direction: column;
         }
         
-        .product-card .card-icon {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.1));
-            color: var(--accent-violet);
-        }
-        
-        .product-card:hover {
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-        
         .price-tag {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 1.75rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--forge-white);
             margin-bottom: 16px;
         }
         
         .price-tag span {
             font-size: 1rem;
-            color: var(--text-muted);
+            color: var(--forge-iron);
             font-weight: 400;
         }
         
         .btn-buy {
-            background: var(--gradient-2);
-            color: white;
+            background: linear-gradient(135deg, var(--forge-ember) 0%, var(--forge-flame) 100%);
+            color: var(--forge-void);
             width: 100%;
             justify-content: center;
             margin-top: auto;
+            padding: var(--space-md);
         }
         
         .btn-buy:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.3);
         }
         
-        /* API Section */
+        /* ═══════════════ API SECTION ═══════════════ */
+        
         .api-section {
-            background: linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.03), transparent);
-        }
-        
-        .api-hero {
-            text-align: center;
-            margin-bottom: 48px;
+            background: linear-gradient(180deg, transparent, var(--forge-glow), transparent);
         }
         
         .api-badge {
@@ -372,10 +452,11 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.2);
+            background: var(--forge-glow);
+            border: 1px solid rgba(255, 107, 53, 0.2);
             border-radius: 100px;
-            color: var(--accent-cyan);
+            color: var(--forge-ember);
+            font-family: var(--font-display);
             font-size: 0.875rem;
             font-weight: 500;
             margin-bottom: 24px;
@@ -390,13 +471,12 @@
         }
         
         .pricing-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
+            background: var(--forge-charcoal);
+            border: 1px solid var(--forge-steel);
+            border-radius: var(--radius-lg);
             padding: 32px 24px;
             text-align: center;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
+            transition: var(--transition-fast);
             opacity: 0;
             transform: translateY(30px);
         }
@@ -408,25 +488,27 @@
         
         .pricing-card:hover {
             transform: translateY(-4px);
-            background: var(--bg-card-hover);
+            border-color: var(--forge-ember);
         }
         
         .pricing-card.featured {
-            border-color: var(--accent-cyan);
-            background: rgba(6, 182, 212, 0.05);
+            border-color: var(--forge-ember);
+            background: linear-gradient(180deg, var(--forge-charcoal), rgba(255, 107, 53, 0.05));
         }
         
         .pricing-card h4 {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 1.25rem;
             margin-bottom: 8px;
+            color: var(--forge-white);
         }
         
         .pricing-card .price {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 2.5rem;
             font-weight: 700;
             margin: 16px 0;
+            color: var(--forge-ember);
         }
         
         .pricing-card .price sup {
@@ -435,7 +517,7 @@
         }
         
         .pricing-card .credits {
-            color: var(--text-secondary);
+            color: var(--forge-silver);
             margin-bottom: 24px;
         }
         
@@ -444,10 +526,7 @@
             justify-content: center;
         }
         
-        /* About Section */
-        .about-section {
-            background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.03), transparent);
-        }
+        /* ═══════════════ ABOUT SECTION ═══════════════ */
         
         .about-content {
             max-width: 700px;
@@ -459,7 +538,7 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: var(--gradient-1);
+            background: linear-gradient(135deg, var(--forge-ember) 0%, var(--forge-flame) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -468,22 +547,31 @@
         }
         
         .about-content h3 {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 1.75rem;
             margin-bottom: 24px;
+            color: var(--forge-white);
         }
         
         .about-content p {
-            color: var(--text-secondary);
+            color: var(--forge-silver);
             font-size: 1.1rem;
             line-height: 1.8;
             margin-bottom: 16px;
         }
         
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 60px 0 40px;
+        /* ═══════════════ FOOTER ═══════════════ */
+        
+        .forge-footer {
+            background: var(--forge-charcoal);
+            border-top: 1px solid var(--forge-steel);
+            padding: var(--space-xl) var(--space-lg);
+            margin-top: var(--space-2xl);
+        }
+        
+        .forge-footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .footer-grid {
@@ -507,26 +595,23 @@
         }
         
         .footer-brand h4 {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 1.5rem;
             margin-bottom: 12px;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--forge-ember);
         }
         
         .footer-brand p {
-            color: var(--text-secondary);
+            color: var(--forge-silver);
             font-size: 0.95rem;
         }
         
         .footer-links h5 {
-            font-family: var(--font-heading);
+            font-family: var(--font-display);
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--text-muted);
+            color: var(--forge-iron);
             margin-bottom: 16px;
         }
         
@@ -539,14 +624,14 @@
         }
         
         .footer-links a {
-            color: var(--text-secondary);
+            color: var(--forge-silver);
             text-decoration: none;
             font-size: 0.95rem;
             transition: color 0.2s;
         }
         
         .footer-links a:hover {
-            color: var(--text-primary);
+            color: var(--forge-ember);
         }
         
         .footer-bottom {
@@ -554,8 +639,8 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 32px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
+            border-top: 1px solid var(--forge-steel);
+            color: var(--forge-iron);
             font-size: 0.875rem;
         }
         
@@ -573,15 +658,21 @@
         }
         
         .social-links a {
-            color: var(--text-muted);
+            color: var(--forge-iron);
             transition: color 0.2s;
         }
         
         .social-links a:hover {
-            color: var(--text-primary);
+            color: var(--forge-ember);
         }
         
-        /* Scroll animations */
+        /* ═══════════════ ANIMATIONS ═══════════════ */
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -613,22 +704,29 @@
     <div class="bg-mesh"></div>
     
     <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <a href="#" class="nav-logo">Simplereally</a>
-            <ul class="nav-links">
-                <li><a href="#forge">Forge Suite</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#api">API</a></li>
-                <li><a href="#about">About</a></li>
-            </ul>
+    <nav class="forge-nav">
+        <div class="forge-nav-inner">
+            <a href="https://simplereally.github.io/" class="forge-logo">
+                <span class="icon">🔥</span>
+                <span>FORGE</span>
+            </a>
+            <div class="forge-nav-links">
+                <a href="https://simplereally.github.io/invoice-forge/">Invoice</a>
+                <a href="https://simplereally.github.io/qr-forge/">QR</a>
+                <a href="https://simplereally.github.io/pass-forge/">Pass</a>
+                <a href="https://simplereally.github.io/color-forge/">Color</a>
+                <a href="https://simplereally.github.io/readme-forge/">Readme</a>
+                <a href="https://simplereally.github.io/meta-forge/">Meta</a>
+                <a href="https://simplereally.github.io/cron-forge/">Cron</a>
+                <a href="https://simplereally.github.io/font-forge/">Font</a>
+            </div>
         </div>
     </nav>
     
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Simplereally</h1>
+            <h1>Simple<span class="accent">really</span></h1>
             <p class="tagline">Tools that do one thing well.</p>
             <div class="hero-cta">
                 <a href="#forge" class="btn btn-primary">
@@ -644,12 +742,12 @@
     <section id="forge">
         <div class="container">
             <div class="section-header fade-in">
-                <h2>🔥 Forge Suite</h2>
+                <h2>🔥 <span class="accent">Forge</span> Suite</h2>
                 <p>Free developer utilities that handle the boring stuff so you can focus on building.</p>
             </div>
             
             <div class="card-grid">
-                <div class="card forge-card">
+                <div class="card">
                     <div class="card-icon">📄</div>
                     <h3>InvoiceForge</h3>
                     <p>Create professional invoices in seconds. Export to PDF, track payments.</p>
@@ -658,7 +756,7 @@
                     </a>
                 </div>
                 
-                <div class="card forge-card">
+                <div class="card">
                     <div class="card-icon">📱</div>
                     <h3>QRForge</h3>
                     <p>Generate QR codes instantly. URLs, text, WiFi, vCards and more.</p>
@@ -667,7 +765,7 @@
                     </a>
                 </div>
                 
-                <div class="card forge-card">
+                <div class="card">
                     <div class="card-icon">🔐</div>
                     <h3>PassForge</h3>
                     <p>Generate secure passwords and passphrases. Customizable strength options.</p>
@@ -676,7 +774,7 @@
                     </a>
                 </div>
                 
-                <div class="card forge-card">
+                <div class="card">
                     <div class="card-icon">🎨</div>
                     <h3>ColorForge</h3>
                     <p>Build beautiful color palettes. Accessibility checker, export in any format.</p>
@@ -685,7 +783,7 @@
                     </a>
                 </div>
                 
-                <div class="card forge-card">
+                <div class="card">
                     <div class="card-icon">📝</div>
                     <h3>ReadmeForge</h3>
                     <p>Generate polished README files for your projects with AI assistance.</p>
@@ -694,7 +792,7 @@
                     </a>
                 </div>
                 
-                <div class="card forge-card">
+                <div class="card">
                     <div class="card-icon">🏷️</div>
                     <h3>MetaForge</h3>
                     <p>Generate SEO meta tags and Open Graph previews for your websites.</p>
@@ -703,7 +801,7 @@
                     </a>
                 </div>
                 
-                <div class="card forge-card">
+                <div class="card">
                     <div class="card-icon">⏰</div>
                     <h3>CronForge</h3>
                     <p>Build and understand cron expressions with an intuitive visual builder.</p>
@@ -712,7 +810,7 @@
                     </a>
                 </div>
                 
-                <div class="card forge-card">
+                <div class="card">
                     <div class="card-icon">🔤</div>
                     <h3>FontForge</h3>
                     <p>Preview and compare fonts. Find the perfect typography for your project.</p>
@@ -728,7 +826,7 @@
     <section id="products">
         <div class="container">
             <div class="section-header fade-in">
-                <h2>💎 Digital Products</h2>
+                <h2>💎 Digital <span class="accent">Products</span></h2>
                 <p>Premium guides and templates to supercharge your workflow and AI skills.</p>
             </div>
             
@@ -789,12 +887,12 @@
     <!-- API Section -->
     <section id="api" class="api-section">
         <div class="container">
-            <div class="api-hero fade-in">
+            <div class="section-header fade-in">
                 <div class="api-badge">
                     <span>⚡</span> API
                 </div>
-                <h2>ScreenshotForge API</h2>
-                <p class="section-header" style="margin-bottom: 0;">Capture pixel-perfect screenshots programmatically. Simple REST API, instant results.</p>
+                <h2>Screenshot<span class="accent">Forge</span> API</h2>
+                <p>Capture pixel-perfect screenshots programmatically. Simple REST API, instant results.</p>
             </div>
             
             <div class="pricing-grid">
@@ -802,7 +900,7 @@
                     <h4>Free</h4>
                     <div class="price">$0</div>
                     <p class="credits">50 screenshots/month</p>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">Perfect for trying out the API</p>
+                    <p style="color: var(--forge-silver); font-size: 0.9rem; margin-bottom: 24px;">Perfect for trying out the API</p>
                     <a href="https://simplereally.github.io/screenshot-forge-api/" class="btn btn-secondary" target="_blank">Get Started</a>
                 </div>
                 
@@ -810,7 +908,7 @@
                     <h4>Starter</h4>
                     <div class="price"><sup>$</sup>9.99</div>
                     <p class="credits">500 screenshots/month</p>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">For small projects and prototypes</p>
+                    <p style="color: var(--forge-silver); font-size: 0.9rem; margin-bottom: 24px;">For small projects and prototypes</p>
                     <a href="https://buy.stripe.com/9B65kwdxLdfp32p3131gs09" class="btn btn-secondary" target="_blank">Buy Credits</a>
                 </div>
                 
@@ -818,7 +916,7 @@
                     <h4>Pro</h4>
                     <div class="price"><sup>$</sup>29.99</div>
                     <p class="credits">5,000 screenshots/month</p>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">For growing applications</p>
+                    <p style="color: var(--forge-silver); font-size: 0.9rem; margin-bottom: 24px;">For growing applications</p>
                     <a href="https://buy.stripe.com/aFa8wIctH3EPeL76df1gs0a" class="btn btn-primary" target="_blank">Buy Credits</a>
                 </div>
                 
@@ -826,7 +924,7 @@
                     <h4>Enterprise</h4>
                     <div class="price"><sup>$</sup>99.99</div>
                     <p class="credits">Unlimited screenshots</p>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px;">For high-volume production use</p>
+                    <p style="color: var(--forge-silver); font-size: 0.9rem; margin-bottom: 24px;">For high-volume production use</p>
                     <a href="https://buy.stripe.com/3cIeV651fa3dcCZgRT1gs0b" class="btn btn-secondary" target="_blank">Contact Sales</a>
                 </div>
             </div>
@@ -834,7 +932,7 @@
     </section>
     
     <!-- About Section -->
-    <section id="about" class="about-section">
+    <section id="about">
         <div class="container">
             <div class="about-content fade-in">
                 <div class="about-avatar">👨‍💻</div>
@@ -860,11 +958,11 @@
     </section>
     
     <!-- Footer -->
-    <footer>
-        <div class="container">
+    <footer class="forge-footer">
+        <div class="forge-footer-inner">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h4>Simplereally</h4>
+                    <h4>🔥 Simplereally</h4>
                     <p>Tools that do one thing well. Built for developers, designers, and makers.</p>
                 </div>
                 
@@ -892,13 +990,14 @@
                     <h5>Connect</h5>
                     <ul>
                         <li><a href="https://github.com/Simplereally" target="_blank">GitHub</a></li>
+                        <li><a href="https://simplereally.github.io/bazaar/" target="_blank">Bazaar Store</a></li>
                         <li><a href="mailto:hello@simplereally.dev">Contact</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>© 2026 Simplereally. All rights reserved.</p>
+                <p>Made with 🔥 by Simplereally</p>
                 <div class="social-links">
                     <a href="https://github.com/Simplereally" target="_blank" aria-label="GitHub">
                         <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
