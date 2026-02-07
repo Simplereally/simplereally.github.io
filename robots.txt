@@ -1,0 +1,11 @@
+# robots.txt for simplereally.github.io
+# Generated: 2026-02-07
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://simplereally.github.io/sitemap.xml
+
+# Crawl-delay (optional, for politeness)
+Crawl-delay: 1
