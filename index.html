@@ -381,6 +381,9 @@
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--forge-white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .card p {
@@ -405,6 +408,65 @@
         
         .card-link:hover {
             gap: 10px;
+        }
+        
+        /* Pro Badge */
+        .pro-badge {
+            background: linear-gradient(135deg, var(--forge-ember) 0%, var(--forge-flame) 100%);
+            color: var(--forge-void);
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pro-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Card Actions */
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-pro-upgrade {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 6px 14px;
+            background: transparent;
+            color: var(--forge-ember);
+            border: 1px solid var(--forge-ember);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+        
+        .btn-pro-upgrade:hover {
+            background: var(--forge-ember);
+            color: var(--forge-void);
         }
         
         /* Product Cards */
@@ -749,38 +811,58 @@
             <div class="card-grid">
                 <div class="card">
                     <div class="card-icon">📄</div>
-                    <h3>InvoiceForge</h3>
+                    <h3>InvoiceForge <span class="pro-badge">Pro</span></h3>
                     <p>Create professional invoices in seconds. Export to PDF, track payments.</p>
-                    <a href="https://simplereally.github.io/invoice-forge/" class="card-link" target="_blank">
-                        Try Free <span>→</span>
-                    </a>
+                    <div class="card-actions">
+                        <a href="https://simplereally.github.io/invoice-forge/" class="card-link" target="_blank">
+                            Try Free <span>→</span>
+                        </a>
+                        <a href="https://buy.stripe.com/cNicMY8dra3dbyV9pr1gs00" class="btn-pro-upgrade" target="_blank">
+                            ⚡ $4.99
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="card">
                     <div class="card-icon">📱</div>
-                    <h3>QRForge</h3>
+                    <h3>QRForge <span class="pro-badge">Pro</span></h3>
                     <p>Generate QR codes instantly. URLs, text, WiFi, vCards and more.</p>
-                    <a href="https://simplereally.github.io/qr-forge/" class="card-link" target="_blank">
-                        Try Free <span>→</span>
-                    </a>
+                    <div class="card-actions">
+                        <a href="https://simplereally.github.io/qr-forge/" class="card-link" target="_blank">
+                            Try Free <span>→</span>
+                        </a>
+                        <a href="https://buy.stripe.com/fZueV6alz8Z932p6df1gs01" class="btn-pro-upgrade" target="_blank">
+                            ⚡ $2.99
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="card">
                     <div class="card-icon">🔐</div>
-                    <h3>PassForge</h3>
+                    <h3>PassForge <span class="pro-badge">Pro</span></h3>
                     <p>Generate secure passwords and passphrases. Customizable strength options.</p>
-                    <a href="https://simplereally.github.io/pass-forge/" class="card-link" target="_blank">
-                        Try Free <span>→</span>
-                    </a>
+                    <div class="card-actions">
+                        <a href="https://simplereally.github.io/pass-forge/" class="card-link" target="_blank">
+                            Try Free <span>→</span>
+                        </a>
+                        <a href="https://buy.stripe.com/00w5kw0KZcbl9qN9pr1gs02" class="btn-pro-upgrade" target="_blank">
+                            ⚡ $1.99
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="card">
                     <div class="card-icon">🎨</div>
-                    <h3>ColorForge</h3>
+                    <h3>ColorForge <span class="pro-badge">Pro</span></h3>
                     <p>Build beautiful color palettes. Accessibility checker, export in any format.</p>
-                    <a href="https://simplereally.github.io/color-forge/" class="card-link" target="_blank">
-                        Try Free <span>→</span>
-                    </a>
+                    <div class="card-actions">
+                        <a href="https://simplereally.github.io/color-forge/" class="card-link" target="_blank">
+                            Try Free <span>→</span>
+                        </a>
+                        <a href="https://buy.stripe.com/5kQ8wIdxLdfp1Yl3131gs03" class="btn-pro-upgrade" target="_blank">
+                            ⚡ $2.99
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="card">
@@ -991,6 +1073,7 @@
                     <ul>
                         <li><a href="https://github.com/Simplereally" target="_blank">GitHub</a></li>
                         <li><a href="https://simplereally.github.io/bazaar/" target="_blank">Bazaar Store</a></li>
+                        <li><a href="https://simplereally.github.io/screenshot-forge-api/" target="_blank">API</a></li>
                         <li><a href="mailto:hello@simplereally.dev">Contact</a></li>
                     </ul>
                 </div>
